@@ -26,5 +26,14 @@
     <ClInclude Include="ball.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="tank.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="bullet.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="gameObj.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

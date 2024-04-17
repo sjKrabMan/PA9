@@ -148,7 +148,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ball.hpp" />
+    <ClInclude Include="bullet.hpp" />
+    <ClInclude Include="gameObj.hpp" />
     <ClInclude Include="paddle.hpp" />
+    <ClInclude Include="tank.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
