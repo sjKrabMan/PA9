@@ -3,6 +3,8 @@
 #include "ball.hpp"
 #include "paddle.hpp"
 
+#include <iostream>
+
 int main()
 {
 	sf::RenderWindow window(sf::VideoMode(1000, 1000), "SFML workEvent(event)");
@@ -53,6 +55,9 @@ int main()
 		window.draw(p1paddle);
 		window.draw(p2paddle);
 		window.display();
+
+		std::cout << "s" << std::endl; // leeevi boom
+		std::cout << "3" << std::endl;
 	}
 
 	return 0;
