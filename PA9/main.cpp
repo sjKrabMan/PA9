@@ -31,6 +31,9 @@ int main()
 		// Ethan is here
 
 
+		///ethhan tehehehehssst
+
+
 
 		window.clear();
 		window.draw(wall1);
