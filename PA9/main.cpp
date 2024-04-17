@@ -1,10 +1,9 @@
 #include <SFML/Graphics.hpp>
-
+#include <iostream>
 #include "ball.hpp"
 #include "paddle.hpp"
 
 //JP was here
-
 int main()
 {
 	sf::RenderWindow window(sf::VideoMode(1000, 1000), "SFML workEvent(event)");
@@ -58,7 +57,7 @@ int main()
 
 
 
-
+		//dope ass comment
 
 
 		window.clear();
@@ -67,6 +66,9 @@ int main()
 		window.draw(p1paddle);
 		window.draw(p2paddle);
 		window.display();
+
+		std::cout << "s" << std::endl; // leeevi boom
+		std::cout << "3" << std::endl;
 	}
 
 	return 0;
