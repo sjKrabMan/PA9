@@ -1,5 +1,5 @@
 #include <SFML/Graphics.hpp>
-
+#include <iostream>
 #include "ball.hpp"
 #include "paddle.hpp"
 
@@ -50,12 +50,27 @@ int main()
 			p2paddle.move(0, 1 * -(direction));
 		}
 
+
+
+
+		//this happened pre pull request
+
+		// peeep this shit boiiisss
+
+
+
+		//dope ass comment
+
+
 		window.clear();
 		//window.draw(shape);
-		window.draw(gameBall);
+		window.draw(gameBall);	
 		window.draw(p1paddle);
 		window.draw(p2paddle);
 		window.display();
+
+		std::cout << "s" << std::endl; // leeevi boom
+		std::cout << "3" << std::endl;
 	}
 
 	return 0;
