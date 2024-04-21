@@ -10,7 +10,11 @@ public:
 	Wall(sf::Vector2f dimensions, sf::Vector2f position) : GameObj() {
 		shape.setSize(dimensions);
 		shape.setPosition(position);
-		shape.setFillColor(sf::Color::Green);
+		shape.setFillColor(sf::Color::Blue);
+	}
+
+	virtual void draw(sf::RenderWindow& window) override {
+		window.draw(shape);
 	}
 
 	virtual void update(const sf::Time& dt) override {

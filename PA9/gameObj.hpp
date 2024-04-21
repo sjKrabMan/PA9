@@ -2,7 +2,7 @@
 #include <SFML/Graphics.hpp>
 
 
-class GameObj {
+class GameObj : public sf::RectangleShape {
 
 public:
 	//this shape declaration can be replaced with sprite if we get those working
@@ -15,7 +15,7 @@ public:
 	}
 	//lil virtual destructor action
 	//not sure what defintion should look like but for now I think default destructor should work
-	virtual ~GameObj();
+	//virtual ~GameObj();
 
 
 	//meant to be overridden by other derived classes if needed
