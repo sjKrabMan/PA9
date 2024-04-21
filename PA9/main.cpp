@@ -6,13 +6,18 @@
 #include "wall.hpp"
 #include "map.hpp"
 
+
+
 int main()
 {
 	sf::RenderWindow window(sf::VideoMode(1000, 1000), "SFML workEvent(event)");
 	//sf::CircleShape shape(100.f);
 
 	Wall wall1(sf::Vector2f(20, 200), sf::Vector2f(0, 0));
-	
+	Wall wall2(sf::Vector2f(20, 200), sf::Vector2f(500, 500));
+
+	Map map1(sf::Vector2f(1000, 1000));
+
 	//Paddle p1paddle(sf::Vector2f(20, 200), sf::Vector2f(0, 0), sf::Color::Green);
 		//p2paddle(sf::Vector2f(20, 200), sf::Vector2f(980, 0), sf::Color::Green);
 
@@ -68,8 +73,9 @@ int main()
 		//window.draw(p1paddle);
 		//window.draw(p2paddle);
 
-		wall1.draw(window);
-		
+		//wall1.draw(window);
+		wall2.draw(window);
+		map1.draw(window);
 		window.display();
 	}
 
