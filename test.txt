@@ -1,1 +1,167 @@
-test
+#include <iostream>
+#include <SFML/Graphics.hpp>
+
+
+
+
+class Paddle : public sf::RectangleShape {
+public:
+	Paddle(const sf::Vector2f& size, const sf::Vector2f& pos,
+		const sf::Color& color) : sf::RectangleShape(size)
+	{ //vector2f is a 2 param vector of floats
+		this->setPosition(pos);
+		this->setFillColor(color);
+	}
+
+private:
+
+};
+
+class Ball : public sf::CircleShape {
+public:
+	Ball(float radius, const sf::Vector2f& pos,
+		const sf::Color color) : sf::CircleShape(radius)
+	{
+		this->setFillColor(color);
+		this->setPosition(pos);
+	}
+private:
+
+};
+
+class Boundary : public sf::RectangleShape 
+{
+
+	public:
+	Boundary(const sf::Vector2f& size, const sf::Vector2f& pos,
+		const sf::Color& color) : sf::RectangleShape(size)
+	{
+		this->setPosition(pos);
+		this->setFillColor(color);
+	}
+
+};
+
+int main()
+{
+	sf::Text text;
+	sf::Font font;
+
+	if (!font.loadFromFile("C:\\SMFL-2.6.1\\arial.ttf")) {
+		std::cout << "Error loading font\n";
+	}
+
+	text.setFont(font);
+	text.setString("Hello World");
+	text.setCharacterSize(24);
+	text.setFillColor(sf::Color::Red);
+	text.setStyle(sf::Text::Bold | sf::Text::Underlined);
+	text.setPosition(100, 100);
+
+
+	sf::RenderWindow window(sf::VideoMode(1000, 1000), "SFML testing");
+	sf::CircleShape shape(100.f);
+
+	Boundary topBoundary(sf::Vector2f(1000, 20), sf::Vector2f(0, 0), sf::Color::Red),
+		bottomBoundary(sf::Vector2f(1000, 20), sf::Vector2f(0, 980), sf::Color::Red);
+
+	Ball gameBall(50.0, sf::Vector2f(450, 450), sf::Color::Blue);
+
+	Paddle p1paddle(sf::Vector2f(20, 200), sf::Vector2f(0, 400), sf::Color::Green),
+		p2paddle(sf::Vector2f(20, 200), sf::Vector2f(980, 400), sf::Color::Green);
+
+	int direction = 1, ballXDir = 1, ballYDir = 1;
+
+
+
+	//shape.setFillColor(sf::Color::Green);
+
+	while (window.isOpen()) {
+		sf::Event event;
+		while (window.pollEvent(event)) {
+			if (event.type == sf::Event::Closed) {
+				window.close();
+			}
+		}
+
+		gameBall.move(.4 * ballXDir, .3 * ballYDir);
+
+		if (gameBall.getGlobalBounds().intersects(p1paddle.getGlobalBounds())) {
+			ballXDir *= -1;
+		}
+
+		if (gameBall.getGlobalBounds().intersects(p2paddle.getGlobalBounds()))
+		{
+			ballXDir *= -1;
+		}
+
+		if (p1paddle.getGlobalBounds().intersects(topBoundary.getGlobalBounds())) {
+			p1paddle.move(0, 1);
+		}	
+
+		if (p1paddle.getGlobalBounds().intersects(bottomBoundary.getGlobalBounds())) {
+			p1paddle.move(0, -1);
+		}
+
+		if (p2paddle.getGlobalBounds().intersects(topBoundary.getGlobalBounds())) {
+			p2paddle.move(0, 1);
+		}
+
+		if (p2paddle.getGlobalBounds().intersects(bottomBoundary.getGlobalBounds())) {
+			p2paddle.move(0, -1);
+		}
+
+		if (gameBall.getGlobalBounds().intersects(topBoundary.getGlobalBounds())) {
+			ballYDir *= -1;
+		}
+
+		if (gameBall.getGlobalBounds().intersects(bottomBoundary.getGlobalBounds())) {
+			ballYDir *= -1;
+		}
+
+		if (gameBall.getPosition().x < 0) {
+			gameBall.setPosition(450, 450);
+			ballXDir *= -1;
+		}
+
+		if (gameBall.getPosition().x > 1000) {
+			gameBall.setPosition(450, 450);
+			ballXDir *= -1;
+		}
+
+		//p1 paddle up/down
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
+			//not case sensitive
+			p1paddle.move(0, 1 * direction);
+		}
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
+			p1paddle.move(0, 1 * -(direction));
+		}
+
+		//p2 paddle up/down
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
+			p2paddle.move(0, 1 * direction);
+		}
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
+			p2paddle.move(0, 1 * -(direction));
+		}
+
+		// close window
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {
+			window.close();
+		}
+
+
+		window.clear();
+		//window.draw(shape);
+		window.draw(gameBall);
+		window.draw(p1paddle);
+		window.draw(p2paddle);
+		window.draw(topBoundary);
+		window.draw(bottomBoundary);
+		window.draw(text);
+		window.display();
+	}
+
+	return 0;
+}
