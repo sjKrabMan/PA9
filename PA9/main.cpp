@@ -213,6 +213,7 @@ Map map1(sf::Vector2f(1000, 1000));
             }
         }
 
+
         if (p2tank.getGlobalBounds().intersects(wall2.getGlobalBounds()))
         {
             if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
@@ -233,6 +234,10 @@ Map map1(sf::Vector2f(1000, 1000));
             }
         }
         ////////////////////////////////////////////////////////
+
+
+
+		// Ethan is here
 
 		window.clear();
 		window.draw(wall1);
