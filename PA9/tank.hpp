@@ -61,9 +61,154 @@ public:
 	}*/
 
 
+    void p1Movement()
+    {
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
+        {
+            move(0, -0.05);
+            setRotation(270.f);
+        }
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
+        {
+            move(0, 0.05);
+            setRotation(90.f);
+        }
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
+        {
+            move(0.05, 0);
+            setRotation(0.f);
+        }
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
+        {
+            move(-0.05, 0);
+            setRotation(180.f);
+        }
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::W) && sf::Keyboard::isKeyPressed(sf::Keyboard::D))
+        {
+            setRotation(315.f);
+        }
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::W) && sf::Keyboard::isKeyPressed(sf::Keyboard::A))
+        {
+            setRotation(225.f);
+        }
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::S) && sf::Keyboard::isKeyPressed(sf::Keyboard::A))
+        {
+            setRotation(135.f);
+        }
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::S) && sf::Keyboard::isKeyPressed(sf::Keyboard::D))
+        {
+            setRotation(45.f);
+        }
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::S) && sf::Keyboard::isKeyPressed(sf::Keyboard::D) && sf::Keyboard::isKeyPressed(sf::Keyboard::A))
+        {
+            setRotation(90.f);
+        }
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::W) && sf::Keyboard::isKeyPressed(sf::Keyboard::D) && sf::Keyboard::isKeyPressed(sf::Keyboard::A))
+        {
+            setRotation(270.f);
+        }
+    }
+
+    void p2Movement()
+    {
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
+        {
+            move(0, -0.05);
+            setRotation(270.f);
+        }
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
+        {
+            move(0, 0.05);
+            setRotation(90.f);
+        }
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
+        {
+            move(0.05, 0);
+            setRotation(0.f);
+        }
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
+        {
+            move(-0.05, 0);
+            setRotation(180.f);
+        }
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up) && sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
+        {
+            setRotation(315.f);
+        }
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up) && sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
+        {
+            setRotation(225.f);
+        }
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down) && sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
+        {
+            setRotation(135.f);
+        }
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down) && sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
+        {
+            setRotation(45.f);
+        }
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down) && sf::Keyboard::isKeyPressed(sf::Keyboard::Right) && sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
+        {
+           setRotation(90.f);
+        }
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up) && sf::Keyboard::isKeyPressed(sf::Keyboard::Right) && sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
+        {
+            setRotation(270.f);
+        }
+    }
+
+
+    void p1Collision(sf::RectangleShape wall)
+    {
+        if (getGlobalBounds().intersects(wall.getGlobalBounds()))
+        {
+            if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
+            {
+                move(0, 0.05);
+            }
+            if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
+            {
+                move(0, -0.05);
+            }
+            if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
+            {
+                move(-0.05, 0);
+            }
+            if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
+            {
+                move(0.05, 0);
+            }
+        }
+
+        
+        
+    }
+
+    void p2Collision(sf::RectangleShape wall)
+    {
+        if (getGlobalBounds().intersects(wall.getGlobalBounds()))
+        {
+            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
+            {
+                move(0, 0.05);
+            }
+            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
+            {
+                move(0, -0.05);
+            }
+            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
+            {
+                move(-0.05, 0);
+            }
+            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
+            {
+                move(0.05, 0);
+            }
+        }
+    }
+
 private:
 
-    sf::ConvexShape tank;
 
 };
 
