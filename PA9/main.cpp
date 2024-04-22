@@ -1,12 +1,12 @@
 #include <SFML/Graphics.hpp>
-
+#include <iostream>
 #include "ball.hpp"
 #include "paddle.hpp"
 //#include "gameObj.hpp"
 #include "wall.hpp"
 #include "map.hpp"
 
-
+//JP was here
 
 int main()
 {
@@ -64,7 +64,7 @@ int main()
 
 
 
-
+		//dope ass comment
 
 
 		window.clear();
@@ -78,6 +78,9 @@ int main()
 		/*wall2.draw(window);
 		map1.draw(window);*/
 		window.display();
+
+		std::cout << "s" << std::endl; // leeevi boom
+		std::cout << "3" << std::endl;
 	}
 
 	return 0;
