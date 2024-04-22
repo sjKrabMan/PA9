@@ -142,25 +142,12 @@ Map map1(sf::Vector2f(1000, 1000));
                 p1tank.move(0.05, 0);
             }
         }
-    
-
-
-
-
-
-		// Ethan is here
-
-
-		// Ethan is here
 
 
 
 		window.clear();
 		window.draw(wall1);
 		window.draw(wall2);
-		//wall1.draw(window);
-		/*wall2.draw(window);
-		map1.draw(window);*/
 
 		window.draw(p1tank);
 		//window.draw(p2tank);
@@ -168,8 +155,6 @@ Map map1(sf::Vector2f(1000, 1000));
 		window.display();
 
 
-		//std::cout << "s" << std::endl; // leeevi boom
-		//std::cout << "3" << std::endl;
 	}
 
 	return 0;

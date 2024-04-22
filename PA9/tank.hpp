@@ -1,6 +1,9 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include "gameObj.hpp"
+#include <vector>
+
+using std::vector;
 
 class Tank : public sf::ConvexShape
 {
@@ -44,7 +47,7 @@ public:
 
   
 
-	~Tank();
+    ~Tank() {};
 
 	//virtual void draw(sf::RenderWindow& window) override {
 	//	//get_shape();
@@ -63,8 +66,7 @@ public:
 
 private:
 
-    sf::ConvexShape tank;
-
+    vector<sf::CircleShape> ammo;
 };
 
 //Tank::Tank(const sf::Vector2f& size, const sf::Vector2f& pos)
@@ -77,7 +79,4 @@ private:
 //
 //}
 
-Tank::~Tank()
-{
-}
 
