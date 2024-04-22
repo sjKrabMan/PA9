@@ -7,12 +7,11 @@
 #include "map.hpp"
 #include "tank.hpp"
 
-//JP was here
 
 int main()
 {
 	sf::RenderWindow window(sf::VideoMode(1000, 1000), "SFML workEvent(event)");
-	//sf::CircleShape shape(100.f);
+	
 
 	Wall wall1(sf::Vector2f(20, 200), sf::Vector2f(0, 0), sf::Color::Cyan);
 	Wall wall2(sf::Vector2f(20, 200), sf::Vector2f(500, 500), sf::Color::Red);
@@ -23,12 +22,7 @@ int main()
 
 	//Map map1(sf::Vector2f(1000, 1000));
 
-	//Paddle p1paddle(sf::Vector2f(20, 200), sf::Vector2f(0, 0), sf::Color::Green);
-		//p2paddle(sf::Vector2f(20, 200), sf::Vector2f(980, 0), sf::Color::Green);
-
-	int direction = 1, ballDirection = 1;
-
-	//shape.setFillColor(sf::Color::Green);
+Map map1(sf::Vector2f(1000, 1000));
 
     while (window.isOpen()) {
         sf::Event event;
@@ -154,11 +148,8 @@ int main()
 
 
 
+
 		window.clear();
-		//window.draw(shape);
-		//window.draw(gameBall);	
-		//window.draw(p1paddle);
-		//window.draw(p2paddle);
 		window.draw(wall1);
 		window.draw(wall2);
 		//wall1.draw(window);
