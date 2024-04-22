@@ -120,6 +120,8 @@ private:
 
 	int mXDir = 1;
 	int mYDir = 1;
+
+
 	
 	bool inPlay = false;
 
