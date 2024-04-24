@@ -5,6 +5,7 @@
 class Map : public GameObj {
 
 public:
+	std::vector<Wall> walls;
 	//creates wall objects around perimeter of map
 	Map(const sf::Vector2f& mapSize) {
 		loadMap(mapSize);
@@ -18,12 +19,19 @@ public:
 		walls.push_back(Wall(sf::Vector2f(wallThickness, mapSize.y), sf::Vector2f(0.0, 0.0), sf::Color::Transparent)); //leftwall
 		walls.push_back(Wall(sf::Vector2f(wallThickness, mapSize.y), sf::Vector2f(mapSize.x - wallThickness, 0), sf::Color::Transparent)); //rightwall
 
-		//obstacles
-		walls.push_back(Wall(sf::Vector2f(20, 20), sf::Vector2f(10, 10), sf::Color::Green));
-		walls.push_back(Wall(sf::Vector2f(20, 20), sf::Vector2f(250, 100), sf::Color::Green));
-		walls.push_back(Wall(sf::Vector2f(20, 20), sf::Vector2f(300, 150), sf::Color::Green));
-		walls.push_back(Wall(sf::Vector2f(20, 20), sf::Vector2f(900, 500), sf::Color::Green));
+		//walls.push_back(Wall(sf::Vector2f(wallThickness, mapSize.y), sf::Vector2f(mapSize.x - 500, 0), sf::Color::Transparent));
 
+
+		//obstacles
+		//five pip design (100 x 100) obstacles
+		walls.push_back(Wall(sf::Vector2f(100, 100), sf::Vector2f(450, 450), sf::Color::Magenta));
+		walls.push_back(Wall(sf::Vector2f(100, 100), sf::Vector2f(225, 225), sf::Color::Magenta));
+		walls.push_back(Wall(sf::Vector2f(100, 100), sf::Vector2f(675, 225), sf::Color::Magenta));
+		walls.push_back(Wall(sf::Vector2f(100, 100), sf::Vector2f(225, 675), sf::Color::Magenta));
+		walls.push_back(Wall(sf::Vector2f(100, 100), sf::Vector2f(675, 675), sf::Color::Magenta));
+
+		walls.push_back(Wall(sf::Vector2f(80, 30), sf::Vector2f(0, 485), sf::Color::Magenta));
+		walls.push_back(Wall(sf::Vector2f(80, 30), sf::Vector2f(mapSize.x - 80, 485), sf::Color::Magenta));
 	}
 
 	void draw(sf::RenderWindow& window) {
@@ -36,8 +44,7 @@ public:
 		//wall wont update. 90% sure I still needed to define this func tho to prevent compile issues.
 	}
 
-private:
-	std::vector<Wall> walls;
+protected:
 
 };
 

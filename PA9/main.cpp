@@ -10,6 +10,7 @@
 
 int main()
 {
+
 	
     Menu menu;
     int option = 0;
@@ -33,22 +34,20 @@ int main()
     sf::RenderWindow window(sf::VideoMode(1000, 1000), "SFML workEvent(event)");
 
 
-	Wall wall1(sf::Vector2f(10, 100), sf::Vector2f(0, 0), sf::Color::Cyan);
-	Wall wall2(sf::Vector2f(10, 100), sf::Vector2f(500, 500), sf::Color::Red);
 
-	Tank p1tank(sf::Vector2f(200, 100), sf::Color::Green);
-	Tank p2tank(sf::Vector2f(740, 740), sf::Color::White);
+	Tank p1tank(sf::Vector2f(100, 100), sf::Color::Green);
+	Tank p2tank(sf::Vector2f(900, 900), sf::Color::White);
 
     Bullet p1Bullet(15, sf::Vector2f(-10, -10), sf::Color::Green);
+
+
+
     Bullet p2Bullet(15, sf::Vector2f(-10, -10), sf::Color::White);
 
+    int p1Lives = 3;
+    int p2Lives = 3;
 
-    int p1CurrentBullet = 3;
-    int p2CurrentBullet = 3;
-
-	//Map map1(sf::Vector2f(1000, 1000));
-
-Map map1(sf::Vector2f(1000, 1000));
+    Map gameMap(sf::Vector2f(1000, 1000));
 
     while (window.isOpen()) {
         sf::Event event;
@@ -56,65 +55,120 @@ Map map1(sf::Vector2f(1000, 1000));
             if (event.type == sf::Event::Closed) {
                 window.close();
             }
+        }      
+
+
+
+       
+        // set up shots based on current bullet
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && !p1Bullet.getInPlay())
+        {
+            p1Bullet.p1setShot(p1tank);
+
+		    }
+
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter) && !p2Bullet.getInPlay())
+        {
+            p2Bullet.p2setShot(p2tank);
+           
         }
 
+        // move bullets if they are in play
+        if (p1Bullet.getInPlay() == true)
+        {
+			      p1Bullet.moveBullet();
+		    }
 
 
-        // collision check member functions for tank player 1
-        p1tank.p1Collision(wall1);
-        p1tank.p1Collision(wall2);
+        if (p2Bullet.getInPlay() == true)
+        {
+            p2Bullet.moveBullet();
+        }
+    
+
+        if (p1Bullet.getGlobalBounds().intersects(p2tank.getGlobalBounds()))
+        {
+
+            p1Bullet.setPosition(-10, -10);
+            p2Bullet.setPosition(-10, -10);
+            p1Bullet.setInPlay(false);
+            p2Bullet.setInPlay(false);
+            p1tank.setPosition(100, 100);
+            p2tank.setPosition(900, 900);
+            
+
+            p2Lives--;
+          
+        }
+
+        if (p2Bullet.getGlobalBounds().intersects(p1tank.getGlobalBounds()))
+        {
+            p1Bullet.setPosition(-10, -10);
+            p2Bullet.setPosition(-10, -10);
+            p1Bullet.setInPlay(false);
+            p2Bullet.setInPlay(false);
+            p1tank.setPosition(100, 100);
+            p2tank.setPosition(900, 900);
+            
+
+            p1Lives--;
+            
+        }
         
-        // collision check member functions for tank player 2
-        p2tank.p2Collision(wall1);
-        p2tank.p2Collision(wall2);
 
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::LShift)) {
-			p1Bullet.p1setShot(p1tank);
-		}
+        for (int i = 0; i < gameMap.walls.size(); ++i) {
+            // collision check member functions for tank & bullet player 1
+            p1tank.p1Collision(gameMap.walls[i]);
+            p1Bullet.WallCollision(gameMap.walls[i]);
 
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::RControl)) {
-			p2Bullet.p2setShot(p2tank);
-		}
-
-        p1Bullet.WallCollision(wall1);
-        p1Bullet.WallCollision(wall2);
-        p1Bullet.moveBullet();
-
-        p2Bullet.WallCollision(wall1);
-        p2Bullet.WallCollision(wall2);
-        p2Bullet.moveBullet();
+            // collision check member functions for tank & bullet player 2
+            p2tank.p2Collision(gameMap.walls[i]);
+            p2Bullet.WallCollision(gameMap.walls[i]);
+        }      
         
-
 
         // p1 tank movement
         p1tank.p1Movement();
 
-        
-        
         // p2 tank movement
         p2tank.p2Movement();
         
+         window.clear();
 
-		window.clear();
-		window.draw(wall1);
-		window.draw(wall2);
 
-		window.draw(p1tank);
-		window.draw(p2tank);
-		window.draw(p1Bullet);
-        window.draw(p2Bullet);
-
-		window.display();
-
-       /* for (int i = 0; i < p1tank.getAmmo().size(); i++)
+        if (p1Bullet.getRicochetLimit() > 0 && p1Bullet.getInPlay())
         {
-            window.draw(p1tank.getAmmo()[i]);
+			    window.draw(p1Bullet);
+		    }
+        else
+        {
+		    	p1Bullet.setInPlay(false);
+          p1Bullet.setRicochetLimit(3);
+		    }
+      
+        if (p2Bullet.getRicochetLimit() > 0 && p2Bullet.getInPlay())
+        {
+			    window.draw(p2Bullet);
+	    	}
+        else
+        {
+			    p2Bullet.setInPlay(false);
+		    	p2Bullet.setRicochetLimit(3);
         }
 
-        for (int i = 0; i < p2tank.getAmmo().size(); i++)
+   
+		window.draw(p1tank);
+		window.draw(p2tank);
+    gameMap.draw(window);
+		window.display();
+
+        
+
+        if (p1Lives == 0 || p2Lives == 0)
         {
-			window.draw(p2tank.getAmmo()[i]);
-		}*/
+            window.close();
+        }
+        
 	}
 
 	return 0;
