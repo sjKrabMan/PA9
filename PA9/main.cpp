@@ -7,18 +7,23 @@
 #include "map.hpp"
 #include "tank.hpp"
 
-
 int main()
 {
 	sf::RenderWindow window(sf::VideoMode(1000, 1000), "SFML workEvent(event)");
 	
 
-	Wall wall1(sf::Vector2f(20, 200), sf::Vector2f(0, 0), sf::Color::Cyan);
-	Wall wall2(sf::Vector2f(20, 200), sf::Vector2f(500, 500), sf::Color::Red);
+	Wall wall1(sf::Vector2f(10, 100), sf::Vector2f(0, 0), sf::Color::Cyan);
+	Wall wall2(sf::Vector2f(10, 100), sf::Vector2f(500, 500), sf::Color::Red);
 
 	Tank p1tank(sf::Vector2f(200, 100), sf::Color::Green);
-
 	Tank p2tank(sf::Vector2f(740, 740), sf::Color::White);
+
+    Bullet p1Bullet(15, sf::Vector2f(-10, -10), sf::Color::Green);
+    Bullet p2Bullet(15, sf::Vector2f(-10, -10), sf::Color::White);
+
+
+    int p1CurrentBullet = 3;
+    int p2CurrentBullet = 3;
 
 	//Map map1(sf::Vector2f(1000, 1000));
 
@@ -32,100 +37,42 @@ Map map1(sf::Vector2f(1000, 1000));
             }
         }
 
-        //gameBall.move(.4 * ballDirection, 0);
-
-        //if (p2paddle.getGlobalBounds().intersects(gameBall.getGlobalBounds())) {
-        //	ballDirection *= -1;
-        //}
-
-        ////p1 paddle up/down
-        //if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
-        //	//not case sensitive
-        //	p1paddle.move(0, 1 * direction);
-        //}
-        //if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
-        //	p1paddle.move(0, 1 * -(direction));
-        //}
-        ////p2 paddle up/down
-        //if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
-        //	p2paddle.move(0, 1 * direction);
-        //}
-        //if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
-        //	p2paddle.move(0, 1 * -(direction));
-        //}
 
 
-        ///////////////this it the collision detection for tank player 1//////////////////////////////////////
-
+        // collision check member functions for tank player 1
         p1tank.p1Collision(wall1);
-
         p1tank.p1Collision(wall2);
-
-        ///////////////this it the collision detection for tank player 2//////////////////////////////////////
-
+        
+        // collision check member functions for tank player 2
         p2tank.p2Collision(wall1);
-
         p2tank.p2Collision(wall2);
 
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::LShift)) {
+			p1Bullet.p1setShot(p1tank);
+		}
 
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::RControl)) {
+			p2Bullet.p2setShot(p2tank);
+		}
 
+        p1Bullet.WallCollision(wall1);
+        p1Bullet.WallCollision(wall2);
+        p1Bullet.moveBullet();
 
-        ///////////////this is all the movement used for tank player 1//////////////////////////////////////////
+        p2Bullet.WallCollision(wall1);
+        p2Bullet.WallCollision(wall2);
+        p2Bullet.moveBullet();
         
 
+
+        // p1 tank movement
         p1tank.p1Movement();
 
-        //////////////////////this is the movment for tank player 2////////////////////////
-       /* if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
-        {
-            p2tank.move(0, -0.05);
-            p2tank.setRotation(270.f);
-        }
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
-        {
-            p2tank.move(0, 0.05);
-            p2tank.setRotation(90.f);
-        }
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
-        {
-            p2tank.move(0.05, 0);
-            p2tank.setRotation(0.f);
-        }
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
-        {
-            p2tank.move(-0.05, 0);
-            p2tank.setRotation(180.f);
-        }
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up) && sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
-        {
-            p2tank.setRotation(315.f);
-        }
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up) && sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
-        {
-            p2tank.setRotation(225.f);
-        }
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down) && sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
-        {
-            p2tank.setRotation(135.f);
-        }
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down) && sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
-        {
-            p2tank.setRotation(45.f);
-        }
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down) && sf::Keyboard::isKeyPressed(sf::Keyboard::Right) && sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
-        {
-            p2tank.setRotation(90.f);
-        }
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up) && sf::Keyboard::isKeyPressed(sf::Keyboard::Right) && sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
-        {
-            p2tank.setRotation(270.f);
-        }*/
-
+        
+        
+        // p2 tank movement
         p2tank.p2Movement();
-    
-
-        ////////////////////////////////////////////////////////
-
+        
 
 		window.clear();
 		window.draw(wall1);
@@ -133,10 +80,20 @@ Map map1(sf::Vector2f(1000, 1000));
 
 		window.draw(p1tank);
 		window.draw(p2tank);
+		window.draw(p1Bullet);
+        window.draw(p2Bullet);
 
 		window.display();
 
+       /* for (int i = 0; i < p1tank.getAmmo().size(); i++)
+        {
+            window.draw(p1tank.getAmmo()[i]);
+        }
 
+        for (int i = 0; i < p2tank.getAmmo().size(); i++)
+        {
+			window.draw(p2tank.getAmmo()[i]);
+		}*/
 	}
 
 	return 0;

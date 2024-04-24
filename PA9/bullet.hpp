@@ -14,96 +14,235 @@ public:
 
 	}
 
-	~Bullet() {};
 
-	// checks for collision with wall
+	// checks for collision with bullet-wall
 	void WallCollision(sf::RectangleShape wall)
 	{
-		float wallRightBounds = wall.getGlobalBounds().left + wall.getGlobalBounds().width;
-		float wallBottomBounds = wall.getGlobalBounds().top + wall.getGlobalBounds().height;
+		
 
-		float ballRightBounds = this->getGlobalBounds().left + this->getGlobalBounds().width;
-		float ballBottomBounds = this->getGlobalBounds().top + this->getGlobalBounds().height;
+		// Calculate bounds of the wall
+		double wallRightBounds = wall.getPosition().x + wall.getSize().x;
+		double wallBottomBounds = wall.getPosition().y + wall.getSize().y;
 
-		// handles ball collision with left wall
-		if (this->getGlobalBounds().left >= wallRightBounds)
+		// Calculate bounds of the bullet
+		double ballRightBounds = this->getPosition().x + this->getRadius();
+		double ballBottomBounds = this->getPosition().y + this->getRadius();
+
+		if (this->getGlobalBounds().intersects(wall.getGlobalBounds()))
+		{
+			
+
+			// ball hits wall from the left or right
+			if ((ballRightBounds <= wall.getGlobalBounds().left + .15 &&
+				ballRightBounds >= wall.getGlobalBounds().left - .15) ||
+				(this->getGlobalBounds().left >= wallRightBounds - .15 &&
+				this->getGlobalBounds().left <= wallRightBounds + .15))
+			{
+				mXDir *= -1;
+				ricochetLimit--;
+			}
+
+			// ball hits wall from the top or bottom
+			if ((ballBottomBounds <= wall.getGlobalBounds().top + .15 &&
+				ballBottomBounds >= wall.getGlobalBounds().top - .15) ||
+				(this->getGlobalBounds().top >= wallBottomBounds - .15 &&
+				this->getGlobalBounds().top <= wallBottomBounds + .15))
+			{
+				mYDir *= -1;
+				ricochetLimit--;
+			}
+
+			
+
+		}
+
+		// make sure ball does not go off screen
+		if (this->getGlobalBounds().left <= 0 || ballRightBounds >= 1000)
 		{
 			mXDir *= -1;
+			ricochetLimit--;
 		}
-
-		// handles ball collision with right wall
-		if (ballRightBounds <= wall.getGlobalBounds().left)
-		{
-			mXDir *= -1;
-		}
-
-		// handles ball collision with top wall
-		if (this->getGlobalBounds().top >= wallBottomBounds)
+		if (this->getGlobalBounds().top <= 0 || ballBottomBounds >= 1000)
 		{
 			mYDir *= -1;
+			ricochetLimit--;
 		}
 
-		// handles ball collision with bottom wall
-		if (ballBottomBounds <= wall.getGlobalBounds().top)
-		{
-			mYDir *= -1;
-		}
 	}
 
 	// set posistion, direction, and speed of ball  ** EXPERIMENTAL **
 	// add a bullet-wall collision check in main before calling this function
-	void setShot(sf::ConvexShape tank)
+	void p1setShot(sf::ConvexShape& tank)
 	{
 		
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
-		{
+		
 			if (tank.getRotation() == 0.f)
 			{
-				this ->setPosition(tank.getPosition().x + 50, tank.getPosition().y);
-				this->move(0, -1);
+				this ->setPosition(tank.getPosition().x + 70, tank.getPosition().y - 15);
+				mXSpeed = .3;
+				mYSpeed = 0;
+
+				mXDir = 1;
+				mYDir = 1;
 
 			}
 			else if (tank.getRotation() == 90.f)
 			{
-				this->setPosition(tank.getPosition().x, tank.getPosition().y + 50);
-				this->move(1, 0);
+				this->setPosition(tank.getPosition().x - 15, tank.getPosition().y + 70);
+				mXSpeed = 0;
+				mYSpeed = .3;
+
+				mXDir = 1;
+				mYDir = 1;
 			}
 			else if (tank.getRotation() == 180.f)
 			{
-				this->setPosition(tank.getPosition().x - 50, tank.getPosition().y);
-				this->move(0, 1);
+				this->setPosition(tank.getPosition().x - 100, tank.getPosition().y - 15);
+				mXSpeed = -.3;
+				mYSpeed = 0;
+
+				mXDir = 1;
+				mYDir = 1;
 			}
 			else if (tank.getRotation() == 270.f)
 			{
-				this->setPosition(tank.getPosition().x, tank.getPosition().y - 50);
-				this->move(-1, 0);
+				this->setPosition(tank.getPosition().x - 15, tank.getPosition().y - 100);
+				mXSpeed = 0;
+				mYSpeed = -.3;
+
+				mXDir = 1;
+				mYDir = 1;
 			}
 			else if (tank.getRotation() == 45.f)
 			{
-				this->setPosition(tank.getOrigin().x + 50, tank.getOrigin().y + 50);
-				this->move(1, -1);
+				this->setPosition(tank.getPosition().x + 45, tank.getPosition().y + 45);
+				mXSpeed = .3;
+				mYSpeed = .3;
+
+				mXDir = 1;
+				mYDir = 1;
 			}
 			else if (tank.getRotation() == 135.f)
 			{
-				this->setPosition(tank.getOrigin().x - 50, tank.getOrigin().y + 50);
-				this->move(1, 1);
+				this->setPosition(tank.getPosition().x - 75, tank.getPosition().y + 45);
+				mXSpeed = -.3;
+				mYSpeed = .3;
+
+				mXDir = 1;
+				mYDir = 1;
 			}
 			else if (tank.getRotation() == 225.f)
 			{
-				this->setPosition(tank.getOrigin().x - 50, tank.getOrigin().y - 50);
-				this->move(-1, 1);
+				this->setPosition(tank.getPosition().x - 75, tank.getPosition().y - 75);
+				mXSpeed = -.3;
+				mYSpeed = -.3;
+
+				mXDir = 1;
+				mYDir = 1;
 			}
 			else if (tank.getRotation() == 315.f)
 			{
-				this->setPosition(tank.getOrigin().x + 50, tank.getOrigin().y - 50);
-				this->move(-1, -1);
+				this->setPosition(tank.getPosition().x + 45, tank.getPosition().y - 75);
+				mXSpeed = .3;
+				mYSpeed = -.3;
+
+				mXDir = 1;
+				mYDir = 1;
 			}
 
 			inPlay = true;
-		}
+		
 		
 	}
 
+	void p2setShot(sf::ConvexShape& tank)
+	{
+		if (tank.getRotation() == 0.f)
+		{
+			this->setPosition(tank.getPosition().x + 70, tank.getPosition().y - 15);
+			mXSpeed = .3;
+			mYSpeed = 0;
+
+			mXDir = 1;
+			mYDir = 1;
+
+		}
+		else if (tank.getRotation() == 90.f)
+		{
+			this->setPosition(tank.getPosition().x - 15, tank.getPosition().y + 70);
+			mXSpeed = 0;
+			mYSpeed = .3;
+
+			mXDir = 1;
+			mYDir = 1;
+		}
+		else if (tank.getRotation() == 180.f)
+		{
+			this->setPosition(tank.getPosition().x - 100, tank.getPosition().y - 15);
+			mXSpeed = -.3;
+			mYSpeed = 0;
+
+			mXDir = 1;
+			mYDir = 1;
+		}
+		else if (tank.getRotation() == 270.f)
+		{
+			this->setPosition(tank.getPosition().x - 15, tank.getPosition().y - 100);
+			mXSpeed = 0;
+			mYSpeed = -.3;
+
+			mXDir = 1;
+			mYDir = 1;
+		}
+		else if (tank.getRotation() == 45.f)
+		{
+			this->setPosition(tank.getPosition().x + 45, tank.getPosition().y + 45);
+			mXSpeed = .3;
+			mYSpeed = .3;
+
+			mXDir = 1;
+			mYDir = 1;
+		}
+		else if (tank.getRotation() == 135.f)
+		{
+			this->setPosition(tank.getPosition().x - 75, tank.getPosition().y + 45);
+			mXSpeed = -.3;
+			mYSpeed = .3;
+
+			mXDir = 1;
+			mYDir = 1;
+		}
+		else if (tank.getRotation() == 225.f)
+		{
+			this->setPosition(tank.getPosition().x - 75, tank.getPosition().y - 75);
+			mXSpeed = -.3;
+			mYSpeed = -.3;
+
+			mXDir = 1;
+			mYDir = 1;
+		}
+		else if (tank.getRotation() == 315.f)
+		{
+			this->setPosition(tank.getPosition().x + 45, tank.getPosition().y - 75);
+			mXSpeed = .3;
+			mYSpeed = -.3;
+
+			mXDir = 1;
+			mYDir = 1;
+		}
+
+		inPlay = true;
+	}
+
+	bool getInPlay()
+	{
+		return inPlay;
+	}
+
+	void moveBullet()
+	{
+		this->move(mXSpeed * mXDir, mYSpeed * mYDir);
+	}
 
 	int getXDir()
 	{
@@ -115,12 +254,29 @@ public:
 		return mYDir;
 	}
 
+	double getXSpeed()
+	{
+		return mXSpeed;
+	}
+
+	double getYSpeed()
+	{
+		return mYSpeed;
+	}
+
+	int getRicochetLimit()
+	{
+		return ricochetLimit;
+	}
+
 
 private:
 
+	int ricochetLimit = 3;
 	int mXDir = 1;
 	int mYDir = 1;
-
+	double mXSpeed = 0;
+	double mYSpeed = 0;
 
 	
 	bool inPlay = false;
