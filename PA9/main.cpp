@@ -6,10 +6,34 @@
 #include "wall.hpp"
 #include "map.hpp"
 #include "tank.hpp"
+#include "Menu.h"
 
 int main()
 {
-	sf::RenderWindow window(sf::VideoMode(1000, 1000), "SFML workEvent(event)");
+
+	
+    Menu menu;
+    int option = 0;
+    do
+    {
+        menu.displaymenu();
+        option = menu.grabChoice();
+        switch (option)
+        {
+        case 1:
+            menu.displayInstructuions();
+            break;
+        case 3:
+            return 0;
+        }
+        
+
+
+    } while (option != 2);
+   
+    sf::RenderWindow window(sf::VideoMode(1000, 1000), "SFML workEvent(event)");
+
+
 
 	Tank p1tank(sf::Vector2f(100, 100), sf::Color::Green);
 	Tank p2tank(sf::Vector2f(900, 900), sf::Color::White);
