@@ -44,6 +44,7 @@ public:
         setOrigin(50, 950);
         setFillColor(color);
         setPosition(pos);
+        setScale(0.5, 0.5);
     }
 
   
@@ -69,22 +70,22 @@ public:
     {
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
         {
-            move(0, -0.05);
+            move(0, -0.1);
             setRotation(270.f);
         }
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
         {
-            move(0, 0.05);
+            move(0, 0.1);
             setRotation(90.f);
         }
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
         {
-            move(0.05, 0);
+            move(0.1, 0);
             setRotation(0.f);
         }
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
         {
-            move(-0.05, 0);
+            move(-0.1, 0);
             setRotation(180.f);
         }
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::W) && sf::Keyboard::isKeyPressed(sf::Keyboard::D))
@@ -117,22 +118,22 @@ public:
     {
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
         {
-            move(0, -0.05);
+            move(0, -0.1);
             setRotation(270.f);
         }
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
         {
-            move(0, 0.05);
+            move(0, 0.1);
             setRotation(90.f);
         }
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
         {
-            move(0.05, 0);
+            move(0.1, 0);
             setRotation(0.f);
         }
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
         {
-            move(-0.05, 0);
+            move(-0.1, 0);
             setRotation(180.f);
         }
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up) && sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
@@ -168,19 +169,19 @@ public:
         {
             if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
             {
-                move(0, 0.05);
+                move(0, 0.1);
             }
             if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
             {
-                move(0, -0.05);
+                move(0, -0.1);
             }
             if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
             {
-                move(-0.05, 0);
+                move(-0.1, 0);
             }
             if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
             {
-                move(0.05, 0);
+                move(0.1, 0);
             }
         }
 
@@ -194,19 +195,19 @@ public:
         {
             if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
             {
-                move(0, 0.05);
+                move(0, 0.1);
             }
             if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
             {
-                move(0, -0.05);
+                move(0, -0.1);
             }
             if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
             {
-                move(-0.05, 0);
+                move(-0.1, 0);
             }
             if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
             {
-                move(0.05, 0);
+                move(0.1, 0);
             }
         }
     }
