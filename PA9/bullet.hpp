@@ -14,6 +14,12 @@ public:
 		this->setPosition(pos);
 		this->setFillColor(color);
 
+		ricochetLimit = 3;
+		mXDir = 1;
+		mYDir = 1;
+		mXSpeed = 0;
+		mYSpeed = 0;
+
 	}
 
 	// checks for collision with bullet-wall
@@ -32,6 +38,7 @@ public:
 		if (this->getGlobalBounds().intersects(wall.getGlobalBounds()))
 		{
 			// ball hits wall from left or right
+
 			if ((ballRightBounds > wall.getGlobalBounds().left - BufferZone && 
 				this->getGlobalBounds().left < wall.getGlobalBounds().left) ||
 				(this->getGlobalBounds().left < wallRightBounds + BufferZone && 
@@ -44,13 +51,16 @@ public:
 			// ball hits wall from the top or bottom
 			if ((ballBottomBounds > wall.getGlobalBounds().top - BufferZone &&
 				this->getGlobalBounds().top < wall.getGlobalBounds().top) ||
+
 				(this->getGlobalBounds().top < wallBottomBounds + BufferZone && 
 				ballBottomBounds > wallBottomBounds))
 			{
-				mYDir *= -1;
+				mYDir = -1;
 				ricochetLimit--;
 			}
+
 		}
+
 	}
 
 	// set posistion, direction, and speed of ball  ** EXPERIMENTAL **
@@ -221,6 +231,10 @@ public:
 	{
 		return inPlay;
 	}
+	void setInPlay(bool play)
+	{
+		inPlay = play;
+	}
 
 	void moveBullet()
 	{
@@ -251,15 +265,19 @@ public:
 	{
 		return ricochetLimit;
 	}
+	void setRicochetLimit(int limit)
+	{
+		ricochetLimit = limit;
+	}
 
 
 private:
 
-	int ricochetLimit = 3;
-	int mXDir = 1;
-	int mYDir = 1;
-	double mXSpeed = 0;
-	double mYSpeed = 0;
+	int ricochetLimit;
+	int mXDir;
+	int mYDir;
+	double mXSpeed;
+	double mYSpeed;
 
 	
 	bool inPlay = false;
