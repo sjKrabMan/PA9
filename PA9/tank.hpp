@@ -2,6 +2,7 @@
 #include <iostream>
 #include "gameObj.hpp"
 #include <vector>
+#include "bullet.hpp"
 
 using std::vector;
 
@@ -210,20 +211,14 @@ public:
         }
     }
 
+
+
 private:
 
 
-    vector<sf::CircleShape> ammo;
+
 };
 
-//Tank::Tank(const sf::Vector2f& size, const sf::Vector2f& pos)
-//{
-//	
-//}
 
-//Tank::Tank(const sf::Vector2f& size, const sf::Vector2f& pos)
-//{
-//
-//}
 
 
