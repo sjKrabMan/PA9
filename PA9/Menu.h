@@ -30,7 +30,9 @@ public:
 		cout << endl;
 		cout << "2. Play Game" << endl;
 		cout << endl;
-		cout << "3, Exit" << endl;
+		cout << "3. test cases" << endl;
+		cout << endl;
+		cout << "4, Exit" << endl;
 		cout << endl;
 	}
 

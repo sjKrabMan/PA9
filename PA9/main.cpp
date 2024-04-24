@@ -3,16 +3,20 @@
 #include "ball.hpp"
 #include "paddle.hpp"
 //#include "gameObj.hpp"
-#include "wall.hpp"
-#include "map.hpp"
-#include "tank.hpp"
+//#include "wall.hpp"
+//#include "map.hpp"
+//#include "tank.hpp"
 #include "Menu.h"
+#include "testing.hpp"
 
 int main()
 {
 	
     Menu menu;
+    testing test;
     int option = 0;
+
+
     do
     {
         menu.displaymenu();
@@ -23,6 +27,11 @@ int main()
             menu.displayInstructuions();
             break;
         case 3:
+            test.test_move();
+
+
+            break;
+        case 4:
             return 0;
         }
         
@@ -48,7 +57,7 @@ int main()
 
 	//Map map1(sf::Vector2f(1000, 1000));
 
-Map map1(sf::Vector2f(1000, 1000));
+    Map map1(sf::Vector2f(1000, 1000));
 
     while (window.isOpen()) {
         sf::Event event;

@@ -154,6 +154,7 @@
     <ClInclude Include="Menu.h" />
     <ClInclude Include="paddle.hpp" />
     <ClInclude Include="tank.hpp" />
+    <ClInclude Include="testing.hpp" />
     <ClInclude Include="wall.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
