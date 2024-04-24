@@ -151,6 +151,7 @@
     <ClInclude Include="bullet.hpp" />
     <ClInclude Include="gameObj.hpp" />
     <ClInclude Include="map.hpp" />
+    <ClInclude Include="Menu.h" />
     <ClInclude Include="paddle.hpp" />
     <ClInclude Include="tank.hpp" />
     <ClInclude Include="wall.hpp" />

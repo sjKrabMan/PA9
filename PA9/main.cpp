@@ -6,11 +6,32 @@
 #include "wall.hpp"
 #include "map.hpp"
 #include "tank.hpp"
+#include "Menu.h"
 
 int main()
 {
-	sf::RenderWindow window(sf::VideoMode(1000, 1000), "SFML workEvent(event)");
 	
+    Menu menu;
+    int option = 0;
+    do
+    {
+        menu.displaymenu();
+        option = menu.grabChoice();
+        switch (option)
+        {
+        case 1:
+            menu.displayInstructuions();
+            break;
+        case 3:
+            return 0;
+        }
+        
+
+
+    } while (option != 2);
+   
+    sf::RenderWindow window(sf::VideoMode(1000, 1000), "SFML workEvent(event)");
+
 
 	Wall wall1(sf::Vector2f(10, 100), sf::Vector2f(0, 0), sf::Color::Cyan);
 	Wall wall2(sf::Vector2f(10, 100), sf::Vector2f(500, 500), sf::Color::Red);
