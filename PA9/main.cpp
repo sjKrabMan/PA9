@@ -3,9 +3,9 @@
 #include "ball.hpp"
 #include "paddle.hpp"
 //#include "gameObj.hpp"
-#include "wall.hpp"
-#include "map.hpp"
-#include "tank.hpp"
+//#include "wall.hpp"
+//#include "map.hpp"
+//#include "tank.hpp"
 #include "Menu.h"
 
 int main()
@@ -13,7 +13,10 @@ int main()
 
 	
     Menu menu;
+   // testing test;
     int option = 0;
+
+
     do
     {
         menu.displaymenu();
@@ -24,6 +27,11 @@ int main()
             menu.displayInstructuions();
             break;
         case 3:
+          /*  test.test_move();
+
+
+            break;
+        case 4:*/
             return 0;
         }
         
@@ -44,8 +52,7 @@ int main()
 
     Bullet p2Bullet(15, sf::Vector2f(-10, -10), sf::Color::White);
 
-    int p1Lives = 3;
-    int p2Lives = 3;
+Map map1(sf::Vector2f(1000, 1000));
 
     Map gameMap(sf::Vector2f(1000, 1000));
 
