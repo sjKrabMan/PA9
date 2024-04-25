@@ -1,11 +1,6 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
-#include "ball.hpp"
-#include "paddle.hpp"
-//#include "gameObj.hpp"
-//#include "wall.hpp"
-//#include "map.hpp"
-//#include "tank.hpp"
+
 #include "Menu.h"
 #include "testing.hpp"
 
