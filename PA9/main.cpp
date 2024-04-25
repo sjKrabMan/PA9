@@ -61,8 +61,9 @@ int main()
 	Tank p2tank(sf::Vector2f(900, 900), sf::Color::White);
 
 
-    Bullet p1Bullet(15, sf::Vector2f(-10, -10), sf::Color::Green);
-    Bullet p2Bullet(15, sf::Vector2f(-10, -10), sf::Color::White);
+    Bullet p1Bullet(15, sf::Vector2f(p1tank.getPosition().x, p1tank.getPosition().y), sf::Color::Green);
+    Bullet p2Bullet(15, sf::Vector2f(p2tank.getPosition().x, p2tank.getPosition().y), sf::Color::White);
+
 
 
     Map map1(sf::Vector2f(1000, 1000));
@@ -83,13 +84,39 @@ int main()
         // set up shots based on current bullet
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && !p1Bullet.getInPlay())
         {
-            p1Bullet.p1setShot(p1tank);
+            int valid = 1;
+            for (int i = 0; i < gameMap.walls.size(); ++i) {
+				
+                if (p1tank.getGlobalBounds().intersects(gameMap.walls[i].getGlobalBounds()))
+                {
+                    valid = 0;
+                }
+                
+			}
 
-		    }
+            if (valid == 1)
+            {
+				p1Bullet.p1setShot(p1tank);
+			}
+
+		}
 
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter) && !p2Bullet.getInPlay())
         {
-            p2Bullet.p2setShot(p2tank);
+
+            int valid = 1;
+            for (int i = 0; i < gameMap.walls.size(); ++i) {
+                if (p2tank.getGlobalBounds().intersects(gameMap.walls[i].getGlobalBounds()))
+                {
+					valid = 0;
+				}
+			}
+
+            if (valid == 1)
+            {
+                p2Bullet.p2setShot(p2tank);
+            }
+            
            
         }
 
@@ -208,7 +235,8 @@ $$ |      $$ |$$    $$ |$$    $$ |$$       |$$ |            $$    $$/ $$ |  $$ |
 $$/       $$/  $$$$$$$/  $$$$$$$ | $$$$$$$/ $$/              $$$$$$/  $$/   $$/  $$$$$$$/       $$/      $$/ $$/ $$/   $$/ $$$$$$$/  $$/ 
                         /  \__$$ |                                                                                                       
                         $$    $$/                                                                                                        
-                         $$$$$$/                                                                                                         )";
+                         $$$$$$/                                                                                                         
+)";
         }
 
         if (p1Lives == 0)
@@ -225,7 +253,8 @@ $$ |      $$ |$$    $$ |$$    $$ |$$       |$$ |               $$ | $$   $$   $$
 $$/       $$/  $$$$$$$/  $$$$$$$ | $$$$$$$/ $$/                $$/   $$$$$/$$$$/   $$$$$$/        $$/      $$/ $$/ $$/   $$/ $$$$$$$/  $$/ 
                         /  \__$$ |                                                                                                         
                         $$    $$/                                                                                                          
-                         $$$$$$/                                                                                                           )";
+                         $$$$$$/                                                                                                           
+)";
         }
 
     }
