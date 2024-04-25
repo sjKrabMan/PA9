@@ -59,9 +59,6 @@ int main()
     Bullet p1Bullet(15, sf::Vector2f(p1tank.getPosition().x, p1tank.getPosition().y), sf::Color::Green);
     Bullet p2Bullet(15, sf::Vector2f(p2tank.getPosition().x, p2tank.getPosition().y), sf::Color::White);
 
-
-
-    Map map1(sf::Vector2f(1000, 1000));
     Map gameMap(sf::Vector2f(1000, 1000));
 
 
