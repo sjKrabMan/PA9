@@ -3,17 +3,22 @@
 #include "ball.hpp"
 #include "paddle.hpp"
 //#include "gameObj.hpp"
-#include "wall.hpp"
-#include "map.hpp"
-#include "tank.hpp"
+//#include "wall.hpp"
+//#include "map.hpp"
+//#include "tank.hpp"
 #include "Menu.h"
+#include "testing.hpp"
 
 int main()
 {
 
 	
     Menu menu;
+    testing test;
     int option = 0;
+
+    bool t_1 = false, t_2 = false, t_3 = false, t_4 = false, t_5 = false;
+
     do
     {
         menu.displaymenu();
@@ -24,27 +29,46 @@ int main()
             menu.displayInstructuions();
             break;
         case 3:
+            t_1 = test.test_move();
+            if (t_1 == true) { cout << "movment test passed" << endl; }
+            t_2 = test.test_rotate();
+            if (t_2 == true) { cout << "rotate test passed" << endl; }
+            test.test_shoot();
+            if (t_3 == true) { cout << "shoot test passed" << endl; }
+            t_4 = test.test_ricochet();
+            if (t_4 == true) { cout << "ricochet test passed" << endl; }
+            t_5 = test.test_kill();
+            if (t_5 == true) { cout << "kill test passed" << endl; }
+            break;
+        case 4:
             return 0;
         }
-        
+
 
 
     } while (option != 2);
+
+
    
     sf::RenderWindow window(sf::VideoMode(1000, 1000), "SFML workEvent(event)");
 
+
+    int p1Lives = 3;
+    int p2Lives = 3;
 
 
 	Tank p1tank(sf::Vector2f(100, 100), sf::Color::Green);
 	Tank p2tank(sf::Vector2f(900, 900), sf::Color::White);
 
+
     Bullet p1Bullet(15, sf::Vector2f(p1tank.getPosition().x, p1tank.getPosition().y), sf::Color::Green);
     Bullet p2Bullet(15, sf::Vector2f(p2tank.getPosition().x, p2tank.getPosition().y), sf::Color::White);
 
-    int p1Lives = 3;
-    int p2Lives = 3;
 
+
+    Map map1(sf::Vector2f(1000, 1000));
     Map gameMap(sf::Vector2f(1000, 1000));
+
 
     while (window.isOpen()) {
         sf::Event event;
@@ -166,8 +190,8 @@ int main()
         else
         {
 		    	p1Bullet.setInPlay(false);
-                p1Bullet.setRicochetLimit(3);
-		}
+          p1Bullet.setRicochetLimit(3);
+		    }
       
         if (p2Bullet.getRicochetLimit() > 0 && p2Bullet.getInPlay())
         {
